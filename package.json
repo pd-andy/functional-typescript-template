@@ -17,6 +17,8 @@
   "homepage": "https://github.com/pd-andy/functional-typescript-template#readme",
   "devDependencies": {
     "@babel/plugin-proposal-pipeline-operator": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
     "parcel-bundler": "^1.12.3"
   }
 }
