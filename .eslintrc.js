@@ -1,25 +1,24 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true
-  },
-  'extends': 'eslint:recommended',
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly'
-  },
-  'parser':  '@typescript-eslint/parser',
-  'extends':  [
-    'plugin:@typescript-eslint/recommended',
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
   ],
-  'parserOptions': {
-    'ecmaVersion': 2018,
-    'sourceType': 'module'
+  "plugins": ["@typescript-eslint/eslint-plugin"],
+  "env": {
+    "browser": true,
   },
-  'rules': {
-    'indent': [ 'error', 2 ],
-    'linebreak-style': [ 'error', 'unix' ],
-    'quotes': [ 'error', 'single' ],
-    'semi': [ 'error', 'never' ]
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "typescript": true
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": [2, {
+      "allowExpressions": true,
+      "allowTypedFunctionExpressions": true,
+      "allowHigherOrderFunctions": true,
+    }],
+    "@typescript-eslint/no-unused-vars": [2, {
+      "argsIgnorePattern": "_"
+    }]
   }
 }
