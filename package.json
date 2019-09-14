@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pd-andy/functional-typescript-template.git"
@@ -16,5 +14,8 @@
   "bugs": {
     "url": "https://github.com/pd-andy/functional-typescript-template/issues"
   },
-  "homepage": "https://github.com/pd-andy/functional-typescript-template#readme"
+  "homepage": "https://github.com/pd-andy/functional-typescript-template#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3"
+  }
 }
