@@ -10,7 +10,7 @@ export interface Result <E, A> {
 }
 
 //
-export const Ok = (a: A): Result<E, A> => ({
+export const ok = (a: A): Result<E, A> => ({
   andThen: f => f(a),
   map: f => f(a) |> Ok,
   mapErr: _ => Ok(a),
@@ -19,7 +19,7 @@ export const Ok = (a: A): Result<E, A> => ({
 })
 
 //
-export const Err = (e: E): Result<E, A> => ({
+export const err = (e: E): Result<E, A> => ({
   andThen: _ => Err(e),
   map: _ => Err(e),
   mapErr: f => f(e) |> Err,
