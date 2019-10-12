@@ -1,31 +1,38 @@
 import MaybeT, * as Maybe from './maybe'
 
-//
-export interface Result <E, A> {
-  andThen <B> (f: (a: A) => Result<E, B>): Result<E, B>,
-  map <B> (f: (a: A) => B): Result<E, B>,
-  mapErr <X> (f: (e: E) => X): Result<X, A>,
+// Result is like the Maybe type but with more information. We use this to
+// model computations that can fail in multiple ways so that the developer has
+// the information to handle the problem. It's sort of like an exception but
+// the program won't grind to a halt if you raise one without catching it.
+export interface ResultT <E, A> {
+  andThen <B> (f: (a: A) => ResultT<E, B>): ResultT<E, B>,
+  map <B> (f: (a: A) => B): ResultT<E, B>,
+  mapErr <X> (f: (e: E) => X): ResultT<X, A>,
   toMaybe (): MaybeT<A>,
   withDefault (a: A): A
 }
 
 //
-export const ok = (a: A): Result<E, A> => ({
-  andThen: f => f(a),
-  map: f => f(a) |> Ok,
-  mapErr: _ => Ok(a),
-  toMaybe: () => Maybe.Just(a),
-  withDefault: _ => a
-})
+export function ok <A, E> (a: A): ResultT<E, A> {
+  return {
+    andThen: f => f(a),
+    map: f => f(a) |> Maybe.ok,
+    mapErr: _ => ok(a),
+    toMaybe: () => Maybe.just(a),
+    withDefault: _ => a
+  }
+}
 
 //
-export const err = (e: E): Result<E, A> => ({
-  andThen: _ => Err(e),
-  map: _ => Err(e),
-  mapErr: f => f(e) |> Err,
-  toMaybe: () => Maybe.Nothing(),
-  withDefault: a => a
-})
+export function err <A, E> (e: E): ResultT<E, A> {
+  return {
+    andThen: _ => err(e),
+    map: _ => err(e),
+    mapErr: f => f(e) |> err,
+    toMaybe: () => Maybe.nothing(),
+    withDefault: a => a
+  }
+}
 
 //
-export default Result
+export default ResultT
